@@ -80,10 +80,9 @@ public class Pcg32 {
         long oldState = state;
 
         state = oldState * MULTIPLIER + inc;
-        long xorShifted = ((oldState >>> 18) ^ oldState) >>> 27;
+        int xorShifted = (int) (((oldState >>> 18) ^ oldState) >>> 27);
         int rot = (int) (oldState >>> 59);
-        long longResult = (xorShifted >>> rot) | (xorShifted << ((-rot) & 31));
-        return (int) longResult;
+        return Integer.rotateRight(xorShifted, rot);
     }
 
     /**
