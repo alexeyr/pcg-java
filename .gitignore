@@ -2,3 +2,6 @@ target/
 .idea/
 *.iml
 jmh-result.*
+// for compiled C program
+*.o
+pcg32-global

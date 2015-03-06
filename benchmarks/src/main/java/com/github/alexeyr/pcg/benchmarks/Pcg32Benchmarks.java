@@ -10,16 +10,10 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+@State(Scope.Thread)
 public class Pcg32Benchmarks {
-    @State(Scope.Thread)
-    public static class JUR {
-        volatile Random gen = new Random();
-    }
-
-    @State(Scope.Thread)
-    public static class PCG {
-        volatile Pcg32 gen = new Pcg32();
-    }
+    volatile Random jur = new Random();
+    volatile Pcg32 pcg = new Pcg32();
 
     @Benchmark
     public Random jurCreation() {
@@ -32,13 +26,13 @@ public class Pcg32Benchmarks {
     }
 
     @Benchmark
-    public int jurInt(JUR jur) {
-        return jur.gen.nextInt();
+    public int jurInt() {
+        return jur.nextInt();
     }
 
     @Benchmark
-    public int pcgInt(PCG pcg) {
-        return pcg.gen.nextInt();
+    public int pcgInt() {
+        return pcg.nextInt();
     }
 
     public static void main(String... args) throws Exception {
