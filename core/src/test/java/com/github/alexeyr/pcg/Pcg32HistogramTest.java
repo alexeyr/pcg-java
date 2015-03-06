@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
  */
 // adapted from https://github.com/non/spire/blob/8b7a78db7d262364421c4f96cfa000cc6f7a35bf/tests/src/test/scala/spire/random/GeneratorTest.scala
 @RunWith(Parameterized.class)
-public class Pcg32Tests {
+public class Pcg32HistogramTest {
     // TODO threshold should depend on base
     private int size = 10000000;
     private double threshold = 0.0038;
@@ -45,7 +45,7 @@ public class Pcg32Tests {
 
     private int base;
 
-    public Pcg32Tests(int base) {
+    public Pcg32HistogramTest(int base) {
         this.base = base;
     }
 
