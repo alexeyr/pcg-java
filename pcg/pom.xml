@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>pcg-java</artifactId>
-        <groupId>com.github.alexeyr</groupId>
-        <version>0.1-SNAPSHOT</version>
+        <artifactId>pcg-parent</artifactId>
+        <groupId>com.github.alexeyr.pcg</groupId>
+        <version>0.9.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>pcg-java-core</artifactId>
+    <artifactId>pcg</artifactId>
     <packaging>jar</packaging>
 
 
