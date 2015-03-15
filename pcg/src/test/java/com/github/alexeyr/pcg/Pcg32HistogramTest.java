@@ -40,7 +40,7 @@ public class Pcg32HistogramTest {
 
     @Parameterized.Parameters(name = "checkDistributionByMod: base = {0}")
     public static Object[] bases() {
-        return new Object[] { 3, 5, 7, 11, 13 };
+        return new Object[] { 3, 5, 7, 11/*, 13*/ };
     }
 
     private int base;
