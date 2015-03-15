@@ -11,6 +11,10 @@
         <module>pcg</module>
     </modules>
 
+    <name>PCG-Java</name>
+    <description>This library implements PCG random number generator in Java.</description>
+    <url>https://github.com/alexeyr/pcg-java</url>
+
     <scm>
         <connection>scm:git:https://github.com/alexeyr/pcg-java.git</connection>
         <developerConnection>scm:git:git@github.com:alexeyr/pcg-java.git</developerConnection>
