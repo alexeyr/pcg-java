@@ -1,6 +1,7 @@
 package com.github.alexeyr.pcg;
 
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,19 +11,20 @@ import java.io.*;
 
 // Note: currently doesn't support Windows
 @RunWith(Parameterized.class)
-public class Pcg32CComparison {
+public class Pcg32CComparisonTest {
     private static File cCodeDir = new File("core/src/test/c").getAbsoluteFile();
     private int countForEachTest = 100;
     private long initState;
     private long initSeq;
 
-    public Pcg32CComparison(long initState, long initSeq) {
+    public Pcg32CComparisonTest(long initState, long initSeq) {
         this.initState = initState;
         this.initSeq = initSeq;
     }
 
     @BeforeClass
     public static void compileC() throws IOException, InterruptedException {
+        Assume.assumeFalse(System.getProperty("os.name").contains("Windows"));
         System.out.println(cCodeDir.getPath());
         Process process = new ProcessBuilder("make").directory(cCodeDir).redirectErrorStream(true).start();
         int exitCode = process.waitFor();
