@@ -8,11 +8,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 // Note: currently doesn't support Windows
 @RunWith(Parameterized.class)
 public class Pcg32CComparisonTest {
-    private static File cCodeDir = new File("core/src/test/c").getAbsoluteFile();
+    private static File cCodeDir;
+
     private int countForEachTest = 100;
     private long initState;
     private long initSeq;
@@ -23,23 +26,23 @@ public class Pcg32CComparisonTest {
     }
 
     @BeforeClass
-    public static void compileC() throws InterruptedException {
-        try {
-            Process process = new ProcessBuilder("make").directory(cCodeDir).redirectErrorStream(true).start();
-            int exitCode = process.waitFor();
-            if (exitCode != 0) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-                    String line;
-                    StringBuilder sb = new StringBuilder();
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line).append("\n");
-                    }
-
-                    throw new IllegalStateException(String.format("Failed to compile C code: %s", sb.toString()));
+    public static void compileC() throws InterruptedException, IOException, URISyntaxException {
+        Assume.assumeFalse(System.getProperty("os.name").startsWith("Windows"));
+        URL makefileUrl = Pcg32CComparisonTest.class.getResource("/Makefile");
+        File makefile = new File(makefileUrl.toURI());
+        cCodeDir = makefile.getAbsoluteFile().getParentFile();
+        Process process = new ProcessBuilder("make").directory(cCodeDir).redirectErrorStream(true).start();
+        int exitCode = process.waitFor();
+        if (exitCode != 0) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
                 }
+
+                throw new IllegalStateException(String.format("Failed to compile C code: %s", sb.toString()));
             }
-        } catch (IOException e) {
-            Assume.assumeTrue("make is not available", false);
         }
     }
 
