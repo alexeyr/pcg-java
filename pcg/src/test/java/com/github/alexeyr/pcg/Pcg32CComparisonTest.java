@@ -25,7 +25,7 @@ public class Pcg32CComparisonTest {
     @BeforeClass
     public static void compileC() throws InterruptedException {
         try {
-            Process process = new ProcessBuilder("/usr/bin/make").directory(cCodeDir).redirectErrorStream(true).start();
+            Process process = new ProcessBuilder("/bin/sh", "-c", "make").directory(cCodeDir).redirectErrorStream(true).start();
             int exitCode = process.waitFor();
             if (exitCode != 0) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
@@ -39,6 +39,7 @@ public class Pcg32CComparisonTest {
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
             Assume.assumeTrue("make is not available", false);
         }
     }
