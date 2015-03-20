@@ -2,9 +2,9 @@ target/
 .idea/
 *.iml
 jmh-result.*
-// for compiled C program
+# for compiled C program
 *.o
 pcg32-global
-// maven-release-plugin
+# maven-release-plugin
 release.properties
 *.releaseBackup
