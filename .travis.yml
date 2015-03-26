@@ -4,3 +4,19 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "R69LeaWoy85U9VpRZ1I6ap9LFuVXGdZ9O1mcxSd+Kg+mTyO3zjO+6erFd2WNED3atwYsYqDRhxwBftD8a3ECXqIm1pMcBf3Ws88uahzg1EYWggmYDOu0NNyL+zrfnzq8825iV2C9coSokK+LhwoJo0LIQ7n6cV9ec0GFyl4w2eU="
+
+addons:
+  coverity_scan:
+    project:
+      name: "alexeyr/pcg-java"
+      description: "Build submitted via Travis CI"
+    notification_email: alexey.v.romanov@gmail.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
